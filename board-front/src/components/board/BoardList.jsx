@@ -1,40 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import * as format from '../../utils/format'
 
-const BoardList = () => {
-
-  const boardList = [
-    {
-      id: 1,
-      title: '게시글 제목1',
-      writer: '작성자1',
-      regDate: '2025-02-22 12:34:56'
-    }, 
-    {
-      id: 2,
-      title: '게시글 제목2',
-      writer: '작성자2',
-      regDate: '2025-02-22 12:34:56'
-    }, 
-    {
-      id: 3,
-      title: '게시글 제목3',
-      writer: '작성자3',
-      regDate: '2025-02-22 12:34:55'
-    }, 
-    {
-      id: 4,
-      title: '게시글 제목4',
-      writer: '작성자4',
-      regDate: '2025-02-22 12:34:54'
-    }, 
-    {
-      id: 5,
-      title: '게시글 제목5',
-      writer: '작성자5',
-      regDate: '2025-02-22 12:34:53'
-    }
-  ]
+const BoardList = ({boardList}) => {  
 
   return (
     <div className="container">
@@ -59,7 +27,7 @@ const BoardList = () => {
                 </Link>
               </td>
               <td align='center'>{board.writer}</td>
-              <td align='center'>{board.regDate}</td>
+              <td align='center'>{format.formatDate(board.regTime)}</td>
             </tr>
           ))}          
         </tbody>
