@@ -33,6 +33,7 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      "jsx-a11y/no-redundant-roles": "off"
     },
   },
 ]

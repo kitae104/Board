@@ -11,11 +11,11 @@ const ListContainer = () => {
   const getList = async () => {
     const response = await board.list()
     const data = await response.data
-    console.log(`data : ${data}`)
+    //console.log(`data : ${data}`)
     const content = data.content
     const pageable = data.pageable
-    console.log(`content : ${content}`)
-    console.log(`pageable',${pageable}`)
+    // console.log(`content : ${content}`)
+    // console.log(`pageable',${pageable}`)
 
     setBoardList(content)    
   }
