@@ -18,12 +18,12 @@
 .table th,
 .table td {
   border: 1px solid black;
-  padding: 8px;
+  padding: 8px;  
 }
 
 .table th {
   background-color: black;
-  color: white;
+  color: white;  
 }
 
 .table th:nth-child(1),
@@ -35,3 +35,4 @@
 .table td:nth-child(2) {
     width: 80%;
 }
+

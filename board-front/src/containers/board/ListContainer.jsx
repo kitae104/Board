@@ -14,10 +14,11 @@ const ListContainer = () => {
     //console.log(`data : ${data}`)
     const content = data.content
     const pageable = data.pageable
-    // console.log(`content : ${content}`)
+    //console.log(`content : ${content}`)
     // console.log(`pageable',${pageable}`)
 
-    setBoardList(content)    
+    setBoardList(content)  
+    console.log(content)  
   }
 
   // 컴포넌트가 마운트 되었을 때 게시글 목록 데이터를 가져옴
