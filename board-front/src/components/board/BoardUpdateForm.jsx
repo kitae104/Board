@@ -21,6 +21,8 @@ const BoardUpdateForm = ({
   const [writer, setWriter] = useState('');
   const [content, setContent] = useState('');
   const [fileIdList, setFileIdList] = useState([]); // 선택 삭제 id 리스트 
+  const [mainFile, setMainFile] = useState(null)  
+  const [files, setFiles] = useState(null);
 
   const changeTitle = (e) => {
     setTitle(e.target.value);
@@ -34,8 +36,43 @@ const BoardUpdateForm = ({
     setContent(e.target.value);
   };
 
+  // 대표 이미지 변경 핸들러
+  const changeMainFile = (e) => {
+    setMainFile(e.target.files[0]); // 파일 정보 저장
+  }
+
+  // 파일 변경 핸들러 
+  const changeFile = (e) => {
+    setFiles(e.target.files); // 파일 정보 저장    
+  };
+
   const onSubmit = () => {
-    onUpdate(id, title, writer, content);
+    // 파일 업로드  -> multipart/form-data 변경    
+    const formData = new FormData();  // FormData 객체 생성
+    // 게시글 정보 설정 
+    formData.append('id', id);  // id 추가
+    formData.append('title', title);  // 제목 추가
+    formData.append('writer', writer);  // 작성자 추가
+    formData.append('content', content);  // 내용 추가
+    
+    // 파일 정보 설정    
+    if( mainFile ) {
+      formData.append('mainFile', mainFile)
+    }
+    
+    if(files) {
+      for(let i = 0; i < files.length; i++) {
+        const file = files[i];
+        formData.append('fileList', file);  // 파일 추가
+      }
+    }
+    
+    // 헤더 설정
+    const headers = {
+      'Content-Type': 'multipart/form-data'  // 파일 업로드 설정
+    };
+    
+    onUpdate(formData, headers);  // multipart/form-data 방식
   };
 
   const handleDelete = () => {
@@ -113,6 +150,18 @@ const BoardUpdateForm = ({
                 onChange={changeContent}
                 className={`${styles['form-input']}`}
               ></textarea>
+            </td>
+          </tr>
+          <tr>
+            <th>대표 이미지</th>
+            <td>
+              <input type="file" onChange={changeMainFile} />
+            </td>
+          </tr>
+          <tr>
+            <th>첨부 파일</th>
+            <td>
+              <input type="file" multiple onChange={changeFile} />
             </td>
           </tr>
           <tr>

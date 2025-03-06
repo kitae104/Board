@@ -21,6 +21,7 @@ const BoardInsertForm = ({ onInsert }) => {
     setContent(e.target.value); // 내용 변경
   };
 
+  // 대표 이미지 변경 핸들러
   const changeMainFile = (e) => {
     setMainFile(e.target.files[0]); // 파일 정보 저장
   }

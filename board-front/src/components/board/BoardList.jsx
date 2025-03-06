@@ -33,11 +33,11 @@ const BoardList = ({boardList}) => {
                 <td align='center'>{board.id}</td>
                 <td>
                   {
-                    board.mainFile === null
+                    board.file === null
                     ?
                     <img src={noImage} />
                     :
-                    <img src={`/api/files/default`} alt={board.file.originName} />
+                    <img src={`/api/file/img/${board.file.id}`} alt={board.file.originName} style={ { width: '100px' } } />
                   }                  
                 </td>
                 <td align='left'>

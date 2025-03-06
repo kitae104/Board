@@ -39,14 +39,27 @@ const ReadContainer = () => {
     document.body.removeChild(link); // body에서 제거
   };
 
+  // mainFile 조회
+  const getMainFile = async () => {
+    const response = await files.fileByType('board', id, 'MAIN');
+    const file = await response.data;    
+    setMainFile(file);
+  };
+
   useEffect(() => {
-    getBoard();
+    getBoard();     // 게시글 정보 (게시글 + 파일 리스트)
+    getMainFile();  // 대표 이미지 정보
   }, []);
 
   return (
     <>
       <div>ReadContainer</div>
-      <BoardRead board={board} fileList={fileList} onDownload={onDownload} />
+      <BoardRead
+        board={board}
+        mainFile={mainFile}
+        fileList={fileList}
+        onDownload={onDownload}
+      />
     </>
   );
 };

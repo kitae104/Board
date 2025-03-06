@@ -17,9 +17,9 @@ const UpdateContainer = () => {
   const navigate = useNavigate()
 
   // 게시글 수정
-  const onUpdate = async (id, title, writer, content) => {
+  const onUpdate = async (formData, headers) => {
     try{
-      const response = await boards.update(id, title, writer, content)
+      const response = await boards.update(formData, headers)
       const data = await response.data
       console.log(`data : ${data}`)
       alert('게시글이 수정되었습니다.')
