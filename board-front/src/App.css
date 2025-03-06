@@ -73,3 +73,42 @@ table {
   width: 100px;    
   object-fit: cover;
 }
+
+.badge {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  font-size: 12px;
+  color: white;
+  padding: 2px 4px;
+  background-color: red;
+  border-radius: 4px;
+}
+
+.item-img {
+  position: relative;
+}
+
+.pagination {
+  margin: 40px auto;
+  display: flex;
+  justify-content: center;
+  column-gap: 5px;
+}
+
+.btn-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 8px;
+  background-color: aliceblue;
+  border-radius: 2px;
+  color: #666;
+}
+
+.btn-page.active,
+.btn-page:hover {
+  text-decoration: none !important;
+  background-color: cyan;
+  color: black;
+}

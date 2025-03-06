@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as format from '../../utils/format'
 import styles from './css/BoardList.module.css'
 import noImage from '../../assets/react.svg'
 
-const BoardList = ({boardList}) => {  
+const BoardList = ({boardList, pageInfo}) => {  
+
+  const [pageList, setPageList] = useState([])
+
+  const createPageList = () => {
+    let newPageList = []
+    for(let i = pageInfo.number+1; i <= pageInfo.totalPages; i++) {
+      newPageList.push(i)
+    }
+    setPageList(newPageList)
+  }
+
+  useEffect(() => {
+    createPageList()
+  }, [pageInfo])
 
   return (
     <div className="container">
@@ -52,6 +66,18 @@ const BoardList = ({boardList}) => {
           }          
         </tbody>
       </table>
+      {/* 페이지 부분 */}
+      <div className='pagination'>
+        <a href='' className='btn-page'>처음</a>
+        <a href='' className='btn-page'>이전</a>
+        {
+          pageList.map((page, index) => (
+            <a href='' key={index} className='btn-page'>{page}</a>
+          ))
+        }
+        <a href='' className='btn-page'>다음</a>
+        <a href='' className='btn-page'>마지막</a>
+      </div>
     </div>
   )
 }

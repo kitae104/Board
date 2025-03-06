@@ -13,7 +13,8 @@ const BoardUpdateForm = ({
   fileList,
   onDownload,
   onDeleteFile,
-  deleteCheckedFiles
+  deleteCheckedFiles,
+  mFile
 }) => {
   const { id } = useParams();
 
@@ -152,12 +153,20 @@ const BoardUpdateForm = ({
               ></textarea>
             </td>
           </tr>
-          <tr>
-            <th>대표 이미지</th>
-            <td>
-              <input type="file" onChange={changeMainFile} />
-            </td>
-          </tr>
+          {
+            mFile
+            ?
+            <></>
+            :
+            (
+              <tr>
+                <th>대표 이미지</th>
+                <td>
+                  <input type="file" onChange={changeMainFile} />
+                </td>
+              </tr>
+            )
+          }
           <tr>
             <th>첨부 파일</th>
             <td>
@@ -170,11 +179,16 @@ const BoardUpdateForm = ({
                 <div key={file.id} className="flex-box">
                   <div className="item">
                     <Checkbox onClick={()=> checkFileId(file.id)} />
-                    <img
-                      src={`/api/file/img/${file.id}`}
-                      alt={file.originName}
-                      className="file-img"
-                    />
+                    <div className='item-img'>
+                      {
+                        file.type === 'MAIN' && <span className='badge'>대표</span>
+                      }
+                      <img
+                        src={`/api/file/img/${file.id}`}
+                        alt={file.originName}
+                        className="file-img"
+                      />
+                    </div>
                     <span>
                       {file.originName} ({format.byteToUnit(file.fileSize)})
                     </span>

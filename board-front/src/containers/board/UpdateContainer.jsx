@@ -87,6 +87,8 @@ const UpdateContainer = () => {
       const fileList = data.fileList
       setFileList(fileList)
       
+      // 대표 파일 요청 
+      getMainFile()
 
     } catch(error) {
       console.log(`error : ${error}`)
@@ -108,13 +110,24 @@ const UpdateContainer = () => {
       const data = await boardResponse.data
       const fileList = data.fileList
       setFileList(fileList)
+      
+      // 대표 파일 요청 
+      getMainFile()
     } catch(error) {
       console.log(`error : ${error}`)
     }
   }
 
+  // mainFile 조회
+  const getMainFile = async () => {
+    const response = await files.fileByType('board', id, 'MAIN');
+    const file = await response.data;    
+    setMainFile(file);
+  };
+
   useEffect(() => {
-    getBoard()
+    getBoard(), 
+    getMainFile()
   }, [])
 
   return (
@@ -127,6 +140,7 @@ const UpdateContainer = () => {
                         onDownload={onDownload}
                         onDeleteFile={onDeleteFile}
                         deleteCheckedFiles={deleteCheckedFiles}
+                        mFile={mainFile}
                         />
     </>
   )

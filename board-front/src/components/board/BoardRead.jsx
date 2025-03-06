@@ -12,13 +12,12 @@ const BoardRead = ({ board = {}, mainFile, fileList, onDownload }) => {
       <h3>번호 : {id}</h3>
       {/* 메인 이미지 */}
       <div>
-        { 
-          mainFile 
-          ? 
-          <img src={`/api/file/img/${mainFile?.id}`} alt={mainFile?.originName} />
-          : 
-          <></>
-        }
+        {mainFile && (
+          <img
+            src={`/api/file/img/${mainFile?.id}`}
+            alt={mainFile?.originName}
+          />
+        )}
       </div>
       <table className={styles.table}>
         <tbody>
@@ -57,11 +56,17 @@ const BoardRead = ({ board = {}, mainFile, fileList, onDownload }) => {
               {fileList.map((file) => (
                 <div key={file.id} className="flex-box">
                   <div className="item">
-                    <img
-                      src={`/api/file/img/${file.id}`}
-                      alt={file.originName}
-                      className="file-img"
-                    />
+                    <div className='item-img'>
+                      {
+                        file.type === 'MAIN' && <span className='badge'>대표</span>
+                      }
+                      <img
+                        src={`/api/file/img/${file.id}`}
+                        alt={file.originName}
+                        className="file-img"
+                      />
+                    </div>
+
                     <span>
                       {file.originName} ({format.byteToUnit(file.fileSize)})
                     </span>

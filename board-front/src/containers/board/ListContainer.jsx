@@ -6,19 +6,19 @@ const ListContainer = () => {
 
   // boardList state 선언 
   const [boardList, setBoardList] = useState([])
+  const [pageInfo, setPageInfo] = useState({})
 
   // 게시글 목록 데이터 
   const getList = async () => {
     const response = await board.list()
-    const data = await response.data
-    //console.log(`data : ${data}`)
+    const data = await response.data    
     const content = data.content
-    const pageable = data.pageable
-    //console.log(`content : ${content}`)
-    // console.log(`pageable',${pageable}`)
+    const pageInfo = data
+    console.dir(content)
+    console.dir(pageInfo)
 
     setBoardList(content)  
-    console.log(content)  
+    setPageInfo(pageInfo)
   }
 
   // 컴포넌트가 마운트 되었을 때 게시글 목록 데이터를 가져옴
@@ -29,7 +29,7 @@ const ListContainer = () => {
   return (
     <>
       <div>ListContainer</div>
-      <BoardList boardList={boardList}/>
+      <BoardList boardList={boardList} pageInfo={pageInfo}/>
     </>
     
   )
