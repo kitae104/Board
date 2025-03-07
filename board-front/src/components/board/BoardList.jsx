@@ -3,6 +3,10 @@ import { Link, useLocation } from 'react-router-dom';
 import * as format from '../../utils/format';
 import styles from './css/BoardList.module.css';
 import noImage from '../../assets/react.svg';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 
 const BoardList = ({ boardList, pageInfo }) => {
 
@@ -86,11 +90,15 @@ const BoardList = ({ boardList, pageInfo }) => {
         (
           <div className="pagination">
             <Link to={`/board?page=${1}`} className="btn-page">
-              처음
-            </Link>
-            <Link to={`/board?page=${pageInfo.number}`} className="btn-page">
-              이전
-            </Link>
+              <KeyboardDoubleArrowLeftIcon />
+            </Link>               
+            {
+              ( pageInfo.number > 0 )
+              &&
+              <Link to={`/board?page=${pageInfo.number}`} className='btn-page'>
+                <KeyboardArrowLeftIcon />        
+              </Link>
+            }
             {pageList.map((page) => (
               <Link
                 to={`/board?page=${page}`}
@@ -100,11 +108,15 @@ const BoardList = ({ boardList, pageInfo }) => {
                 {page}
               </Link>
             ))}
-            <Link to={`/board?page=${pageInfo.number+2}`} className="btn-page">
-              다음
-            </Link>
+            {
+              ( pageInfo.number+1 < pageInfo.totalPages )
+              &&
+              <Link to={`/board?page=${pageInfo.number+2}`} className="btn-page">
+                <KeyboardArrowRightIcon />
+              </Link>
+            }           
             <Link to={`/board?page=${pageInfo.totalPages}`} className="btn-page">
-              마지막
+              <KeyboardDoubleArrowRightIcon />
             </Link>
           </div>
         )        
